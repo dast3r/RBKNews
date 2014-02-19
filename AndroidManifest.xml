@@ -4,9 +4,8 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-permission 
-        android:name="android.permission.GET_TASKS" />
-    
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
@@ -33,6 +32,20 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".NewsActivity"
+            android:label="Новости" >
+            <intent-filter>
+                <action android:name=".NewsActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".UpdateNewsService"
+            android:enabled="true" >
+        </service>
     </application>
 
 </manifest>
