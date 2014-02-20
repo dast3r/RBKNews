@@ -5,6 +5,7 @@
     android:versionName="1.0" >
 
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -15,7 +16,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".WebsterActivity"
+            android:name="ru.vorobjev.rbcnews.activities.WebsterActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,16 +25,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ViewActivity"
+            android:name="ru.vorobjev.rbcnews.activities.ViewActivity"
             android:label="Просмотр" >
             <intent-filter>
-                <action android:name=".ViewActivity" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <data android:scheme="http" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewsActivity"
+            android:name="ru.vorobjev.rbcnews.activities.NewsActivity"
             android:label="Новости" >
             <intent-filter>
                 <action android:name=".NewsActivity" />
@@ -41,9 +44,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="ru.vorobjev.rbcnews.activities.PreferencesActivity"
+            android:label="Настройки" >
+            <action android:name=".PreferencesActivity" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
 
         <service
-            android:name=".UpdateNewsService"
+            android:name="ru.vorobjev.rbcnews.servicies.UpdateNewsService"
             android:enabled="true" >
         </service>
     </application>

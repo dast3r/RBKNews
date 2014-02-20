@@ -1,6 +1,9 @@
-package ru.vorobjev.rbknews;
+package ru.vorobjev.rbcnews.db;
 
 import java.text.SimpleDateFormat;
+
+import ru.vorobjev.rbcnews.constants.C;
+import ru.vorobjev.rbcnews.objects.RssItem;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -44,8 +47,12 @@ public class DatabaseHandler {
 		cv.put(C.RSS_ITEMS_TABLE_DESCRIPTION, rssItem.getDescription());
 		cv.put(C.RSS_ITEMS_TABLE_PUBDATE, rssItem.getPubDate() != null ? new SimpleDateFormat().format(rssItem.getPubDate()) : null);
 		cv.put(C.RSS_ITEMS_TABLE_LINK, rssItem.getLink());
-
+		
+		database.beginTransaction();
 		database.insert(C.RSS_ITEMS_TABLE, null, cv);
+		database.setTransactionSuccessful();
+		database.endTransaction();
+		
 	}
 
 }

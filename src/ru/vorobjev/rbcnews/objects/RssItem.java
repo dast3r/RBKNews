@@ -1,4 +1,4 @@
-package ru.vorobjev.rbknews;
+package ru.vorobjev.rbcnews.objects;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

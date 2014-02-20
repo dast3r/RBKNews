@@ -1,4 +1,4 @@
-package ru.vorobjev.rbknews;
+package ru.vorobjev.rbcnews.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
