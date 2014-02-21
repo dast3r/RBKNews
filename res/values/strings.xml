@@ -8,7 +8,7 @@
     <string name="btn_preferences">Настройки</string>
     <string name="interval">Интервал обновления</string>
     <string name="category">Категория новостей</string>
-    <string name="interval_summary">Интервал синхронизации новостей в бэкграунде. В минутах.</string>
+    <string name="interval_summary">Интервал синхронизации новостей в бэкграунде. В секундах.</string>
     <string name="category_summary">Категория новостей, которая будет отображатся на экране.</string>
     <string name="prefs_categories">Новости</string>
     <string name="prefs_update">Обновление</string>

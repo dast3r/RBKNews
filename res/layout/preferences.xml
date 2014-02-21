@@ -9,6 +9,8 @@
         android:title="@string/category" />
     
     <EditTextPreference
+        android:maxLength="9" 
+        android:inputType="number"
         android:key="interval"
         android:summary="@string/interval_summary"
         android:title="@string/interval" />

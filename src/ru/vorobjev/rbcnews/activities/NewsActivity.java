@@ -79,6 +79,7 @@ public class NewsActivity extends FragmentActivity implements
 			public void onReceive(Context context, Intent intent) {
 				lvData.onRefreshComplete();
 				cursor = db.getAllData(C.RSS_ITEMS_TABLE);
+				scAdapter.changeCursor(cursor);
 				int status = intent.getIntExtra(C.PARAM_STATUS, 0);
 				if (status == C.STATUS_BAD) {
 					String exception = intent.getStringExtra(C.PARAM_EXCEPTION);

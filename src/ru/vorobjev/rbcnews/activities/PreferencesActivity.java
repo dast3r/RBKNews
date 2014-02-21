@@ -1,6 +1,7 @@
 package ru.vorobjev.rbcnews.activities;
 
 import ru.vorobjev.rbknews.R;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -20,12 +21,13 @@ public class PreferencesActivity extends PreferenceActivity {
             super.onCreate(savedInstanceState);
             
             addPreferencesFromResource(R.layout.preferences);
-            Preference category = (Preference) findPreference("category");
-            category.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            Preference interval = (Preference) findPreference("interval");
+            interval.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 				
 				@Override
 				public boolean onPreferenceChange(Preference preference, Object newValue) {
-					
+					Intent intent = new Intent(WebsterActivity.UPDATE_INTERVAL);
+					sendBroadcast(intent);
 					return true;
 				}
 			});

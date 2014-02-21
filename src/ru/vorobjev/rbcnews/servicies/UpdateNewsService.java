@@ -40,8 +40,9 @@ public class UpdateNewsService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		final String feedUrl = PreferencesHelper.getPreferences(getBaseContext())
-				.getString("category", PreferencesHelper.getDefaultCategory(getBaseContext()));
+		final String feedUrl = PreferencesHelper.getPreferences(
+				getBaseContext()).getString("category",
+				PreferencesHelper.getDefaultCategory(getBaseContext()));
 		new AsyncTask<Void, Void, Void>() {
 
 			ErrorStatusException ex;
@@ -51,18 +52,13 @@ public class UpdateNewsService extends Service {
 				try {
 					ArrayList<RssItem> rssItems = getRssItems(feedUrl);
 					if (!rssItems.isEmpty()) {
-						DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-						db.open();
-						db.clearTable(C.RSS_ITEMS_TABLE);
-						for (RssItem item : rssItems) {
-							db.insertRssItem(item);
-						}
-						db.close();
+						writeToDB(rssItems);
 					}
 				} catch (ErrorStatusException ex) {
 					this.ex = ex;
 				}
 				return null;
+
 			}
 
 			protected void onPostExecute(Void result) {
@@ -76,8 +72,16 @@ public class UpdateNewsService extends Service {
 		}.execute();
 		return super.onStartCommand(intent, flags, startId);
 	}
-	
 
+	private void writeToDB(ArrayList<RssItem> rssItems) {
+		DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+		db.open();
+		db.clearTable(C.RSS_ITEMS_TABLE);
+		for (RssItem item : rssItems) {
+			db.insertRssItem(item);
+		}
+		db.close();
+	}
 
 	private ArrayList<RssItem> getRssItems(String feedUrl)
 			throws ErrorStatusException {
@@ -151,21 +155,25 @@ public class UpdateNewsService extends Service {
 					Element _linkE = (Element) entry.getElementsByTagName(
 							"link").item(0);
 
-					String _title = _titleE != null ? _titleE.getFirstChild().getNodeValue() : "";
-					String _description = _descriptionE != null ? _descriptionE.getFirstChild()
+					String _title = _titleE != null ? _titleE.getFirstChild()
 							.getNodeValue() : "";
+					String _description = _descriptionE != null ? _descriptionE
+							.getFirstChild().getNodeValue() : "";
 					Date _pubDate = null;
 					try {
 						_pubDate = _pubDateE != null ? new SimpleDateFormat(
 								"EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH)
-								.parse(_pubDateE.getFirstChild().getNodeValue()) : null;
+								.parse(_pubDateE.getFirstChild().getNodeValue())
+								: null;
 					} catch (DOMException e) {
 					} catch (ParseException e) {
 					}
-					String _link = _linkE != null ? _linkE.getFirstChild().getNodeValue() : "";
+					String _link = _linkE != null ? _linkE.getFirstChild()
+							.getNodeValue() : "";
 
 					// create RssItemObject and add it to the ArrayList
-					RssItem rssItem = new RssItem(_title, _description, _pubDate, _link);
+					RssItem rssItem = new RssItem(_title, _description,
+							_pubDate, _link);
 
 					rssItems.add(rssItem);
 				}
